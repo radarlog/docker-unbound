@@ -29,7 +29,7 @@ RUN set -e \
     && make install \
     #
     # Create custom user
-	   && groupadd unbound \
+    && groupadd unbound \
     && useradd -g unbound -d /dev/null unbound \
     #
     # Clean up
