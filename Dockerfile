@@ -11,27 +11,27 @@ ENV UNBOUND_DOWNLOAD_URL https://www.unbound.net/downloads/unbound-${UNBOUND_VER
 
 RUN set -e \
     && cd /tmp \
-
+    #
     # Install dependencies
     && apk --no-cache add --update $RUNTIME_DEPS $BUILD_DEPS \
-
-     # Download and extract
+    #
+    # Download and extract
     && curl -o unbound.tar.gz -fSL ${UNBOUND_DOWNLOAD_URL} \
     && echo "${UNBOUND_SHA1} *unbound.tar.gz" | sha1sum -c - \
     && tar zxvf unbound.tar.gz \
     && cd unbound-${UNBOUND_VERSION} \
-
+    #
     # Build
     && ./configure \
        --with-libevent \
        --enable-event-api \
        --enable-dnscrypt \
     && make install \
-
+    #
     # Create custom user
 	   && groupadd unbound \
     && useradd -g unbound -d /dev/null unbound \
-
+    #
     # Clean up
     && apk del --purge $BUILD_DEPS \
     && rm -rf /tmp/* /var/cache/apk/*
