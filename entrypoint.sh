@@ -2,11 +2,10 @@
 set -e
 
 PREFIX=/usr/local/etc/unbound
+KEYS_DIR=${PREFIX}/keys
 ROOT_HINTS_URL=https://www.internic.net/domain/named.cache
-
-# Use fresh root hints file
-curl -o ${PREFIX}/root.hints -sfSL ${ROOT_HINTS_URL}
-echo 'Root hints have been successfully updated'
+ROOT_HINTS_FILE=${KEYS_DIR}/unbound_root.hints
+ANCHOR_FILE=${KEYS_DIR}/unbound_anchor.key
 
 # Auto adjust the number of threads
 if [ $(grep -c '{{THREADS}}' ${PREFIX}/unbound.conf) == 1 ]; then
@@ -16,15 +15,17 @@ if [ $(grep -c '{{THREADS}}' ${PREFIX}/unbound.conf) == 1 ]; then
 fi
 
 # Enable remote control
-if [ ! -f ${PREFIX}/unbound_control.pem ]; then
-    unbound-control-setup
+if [ ! -f ${KEYS_DIR}/unbound_control.pem ]; then
+    unbound-control-setup -d ${KEYS_DIR}
 fi
 
+# Use fresh root hints file
+curl -o ${ROOT_HINTS_FILE} -sfSL ${ROOT_HINTS_URL}
+echo 'Root hints have been successfully updated'
+
 # Enable DNSSEC
-if [ ! -f ${PREFIX}/var/root.key ]; then
-    mkdir -p -m 700 ${PREFIX}/var
-    chown unbound:unbound ${PREFIX}/var
-    unbound-anchor -a ${PREFIX}/var/root.key -r ${PREFIX}/root.hints
+if [ ! -f ${ANCHOR_FILE} ]; then
+    unbound-anchor -a ${ANCHOR_FILE} -r ${ROOT_HINTS_FILE}
 fi
 
 unbound-checkconf

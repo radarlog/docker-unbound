@@ -42,5 +42,7 @@ COPY unbound.conf /usr/local/etc/unbound/
 EXPOSE 53/udp 53/tcp
 EXPOSE 443/udp 443/tcp
 
+VOLUME /usr/local/etc/unbound/keys
+
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["unbound", "-d"]
