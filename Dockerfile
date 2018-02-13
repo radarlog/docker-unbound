@@ -39,7 +39,8 @@ RUN set -e \
 COPY entrypoint.sh /bin/entrypoint.sh
 COPY unbound.conf /usr/local/etc/unbound/
 
-EXPOSE 53/udp 53/tcp 443/udp 443/tcp
+EXPOSE 53/udp 53/tcp
+EXPOSE 443/udp 443/tcp
 
 ENTRYPOINT ["entrypoint.sh"]
 CMD ["unbound", "-d"]
