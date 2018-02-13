@@ -3,7 +3,7 @@ FROM alpine:3.7
 MAINTAINER Ilian Ranguelov <me@radarlog.net>
 
 ENV BUILD_DEPS make gcc musl-dev ldns-dev libevent-dev expat-dev shadow libsodium-dev
-ENV RUNTIME_DEPS bash libevent libsodium openssl expat curl
+ENV RUNTIME_DEPS bash libevent libsodium libressl expat curl
 
 ENV UNBOUND_VERSION 1.6.8
 ENV UNBOUND_SHA1 492737be9647c26ee39d4d198f2755062803b412
