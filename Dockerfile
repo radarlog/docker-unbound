@@ -5,8 +5,8 @@ MAINTAINER Ilian Ranguelov <me@radarlog.net>
 ENV BUILD_DEPS make gcc musl-dev ldns-dev libevent-dev expat-dev shadow libsodium-dev
 ENV RUNTIME_DEPS bash libevent libsodium libressl expat curl
 
-ENV UNBOUND_VERSION 1.6.8
-ENV UNBOUND_SHA1 492737be9647c26ee39d4d198f2755062803b412
+ENV UNBOUND_VERSION 1.7.0
+ENV UNBOUND_SHA1 d90b09315c75ad2843b868785b3d12a2c4f27b28
 ENV UNBOUND_DOWNLOAD_URL https://www.unbound.net/downloads/unbound-${UNBOUND_VERSION}.tar.gz
 
 RUN set -e \
