@@ -22,7 +22,6 @@ RUN set -e \
     # Download and extract libsodium
     && curl -o libsodium.tar.gz $LIBSODIUM_DOWNLOAD_URL \
     && echo "${LIBSODIUM_SHA1} *libsodium.tar.gz" | sha1sum -c - \
-
     && tar xzf libsodium.tar.gz \
     && cd libsodium-${LIBSODIUM_VERSION} \
     #
