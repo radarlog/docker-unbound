@@ -27,6 +27,8 @@ RUN set -e \
        --with-libnghttp2 \
        --with-pthreads \
        --enable-event-api \
+       --enable-tfo-server \
+       --enable-tfo-client \
     && make install \
     #
     # Create custom user
