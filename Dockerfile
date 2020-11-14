@@ -2,8 +2,8 @@ FROM alpine:3.12
 
 LABEL maintainer="Ilian Ranguelov <me@radarlog.net>"
 
-ENV BUILD_DEPS expat-dev gcc make musl-dev libevent-dev openssl-dev shadow
-ENV RUNTIME_DEPS curl expat libevent openssl
+ENV BUILD_DEPS expat-dev gcc make musl-dev libevent-dev nghttp2-dev openssl-dev shadow
+ENV RUNTIME_DEPS curl expat libevent nghttp2-libs openssl
 
 ENV UNBOUND_VERSION 1.12.0
 ENV UNBOUND_SHA1 68009078d5f5025c95a8c9fe20b9e84335d53e2d
@@ -24,6 +24,7 @@ RUN set -e \
     # Build unbound
     && ./configure \
        --with-libevent \
+       --with-libnghttp2 \
        --with-pthreads \
        --enable-event-api \
     && make install \
@@ -38,7 +39,7 @@ RUN set -e \
 
 VOLUME /usr/local/etc/unbound/keys
 
-EXPOSE 53/udp 53/tcp
+EXPOSE 53/udp 53/tcp 443/tcp
 
 COPY entrypoint.sh /bin/entrypoint.sh
 COPY unbound.conf /usr/local/etc/unbound/
