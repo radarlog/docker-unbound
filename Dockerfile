@@ -3,7 +3,7 @@ FROM alpine:3.12
 LABEL maintainer="Ilian Ranguelov <me@radarlog.net>"
 
 ENV BUILD_DEPS expat-dev gcc make musl-dev libevent-dev nghttp2-dev openssl-dev shadow
-ENV RUNTIME_DEPS curl expat libevent nghttp2-libs openssl
+ENV RUNTIME_DEPS ca-certificates curl expat libevent nghttp2-libs openssl
 
 ENV UNBOUND_VERSION 1.12.0
 ENV UNBOUND_SHA1 68009078d5f5025c95a8c9fe20b9e84335d53e2d
