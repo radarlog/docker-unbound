@@ -29,7 +29,7 @@ RUN set -e \
        --enable-event-api \
        --enable-tfo-server \
        --enable-tfo-client \
-    && make install \
+    && make -j$(nproc) install \
     #
     # Create custom user
     && groupadd unbound \
