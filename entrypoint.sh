@@ -25,6 +25,7 @@ echo 'Root hints have been successfully updated'
 
 # Enable DNSSEC
 if [ ! -f ${ANCHOR_FILE} ]; then
+    chown unbound:unbound ${KEYS_DIR}
     unbound-anchor -a ${ANCHOR_FILE} -r ${ROOT_HINTS_FILE}
 fi
 
