@@ -41,7 +41,7 @@ RUN set -e \
 
 VOLUME /usr/local/etc/unbound/keys
 
-EXPOSE 53/udp 53/tcp 443/tcp
+EXPOSE 53/udp 53/tcp 443/tcp 853/tcp
 
 COPY entrypoint.sh /bin/entrypoint.sh
 COPY unbound.conf /usr/local/etc/unbound/
